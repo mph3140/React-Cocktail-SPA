@@ -2,12 +2,17 @@ import React from "react";
 
 class Ingredients extends React.Component {
     
+    constructor(props){
+        super(props);
+        
+    }
+
     render() {
         return (
             <div classname="ingredient-info">
                 {
-                    this.props.ingredientName && <p className="ingredient__key">
-                        <span className="ingredient__key"> {this.props.ingredientName}</span>
+                    this.props.drinks && <p className="drink__key">
+                        <span className="drink__key"> {this.props.drinks}</span>
                     </p>
                 }
             </div>

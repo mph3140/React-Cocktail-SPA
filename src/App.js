@@ -9,37 +9,58 @@ const axios = require('axios')
 
 class App extends React.Component {
   
-  state = {
-    searchIngredient: undefined
+
+  constructor() {
+    super()
+    this.state = {
+      drinks: []
+    }
   }
 
-  getIngredients = async (e) => {
+  componentDidMount = () => {
 
-    const options = {
-      "method":"GET",
-      "headers":{
-      "content-type":"application/octet-stream",
-      "x-rapidapi-host":"the-cocktail-db.p.rapidapi.com",
-      "x-rapidapi-key":"4769e24f8fmshe32fdfc0bcb4eb9p180b95jsnf3e30198cfff"
-      },"params":{
-      "a":"list"
-      }    
-    };
-
-    return await axios.get('https://the-cocktail-db.p.rapidapi.com/list.php', options)
-      .then((response)=>{
-        console.log(response)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+      const options = {
+        "method":"GET",
+        "headers":{
+        "content-type":"application/octet-stream",
+        "x-rapidapi-host":"the-cocktail-db.p.rapidapi.com",
+        "x-rapidapi-key":"4769e24f8fmshe32fdfc0bcb4eb9p180b95jsnf3e30198cfff"
+        },"params":{
+        "i":"list"
+        }    
+      };
+  
+      return axios.get('https://the-cocktail-db.p.rapidapi.com/list.php', options)
+        .then((response)=>{
+          console.log(response)
+          // this.state.drinks.map(item => (<li key={item}>{item}</li>))
+          
+          var tmpArray = []
+          for (var i = 0; i < response.data.drinks.length; i++){
+            tmpArray.push(<li>{response.data.drinks[i].strIngredient1}</li>)
+          }
+          // response.data.drinks.forEach(element => {
+          //   tmpArray.push(element.value)
+          // // this.state.drinks.concat(<li>{element}</li>)
+          // });
+          // this.setState({
+          //   drinks: response.data.drinks
+          // })
+          this.setState({
+            drinks: tmpArray
+          })
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    
   }
-
 
   render() {
     return (
       <div className="App">
-        <h1>Test</h1>
+        <h1>Liqours</h1>
+        <ol>{this.state.drinks}</ol>
       </div>
     )
   }
