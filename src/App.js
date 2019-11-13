@@ -33,21 +33,12 @@ class App extends React.Component {
       return axios.get('https://the-cocktail-db.p.rapidapi.com/list.php', options)
         .then((response)=>{
           console.log(response)
-          // this.state.drinks.map(item => (<li key={item}>{item}</li>))
-          
           var tmpArray = []
           for (var i = 0; i < response.data.drinks.length; i++){
             tmpArray.push(<li>{response.data.drinks[i].strIngredient1}</li>)
           }
-          // response.data.drinks.forEach(element => {
-          //   tmpArray.push(element.value)
-          // // this.state.drinks.concat(<li>{element}</li>)
-          // });
-          // this.setState({
-          //   drinks: response.data.drinks
-          // })
           this.setState({
-            drinks: tmpArray
+            drinks: tmpArray      //unsure if need for temporary array. Consider removing later
           })
         })
         .catch((error) => {
@@ -59,8 +50,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Liqours</h1>
-        <ol>{this.state.drinks}</ol>
+        <div className="App-header">
+          <h1>Liqours</h1>
+        </div>
+        <div classname="list">
+          <ol>{this.state.drinks}</ol>
+        </div>
       </div>
     )
   }

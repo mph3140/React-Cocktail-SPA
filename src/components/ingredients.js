@@ -1,3 +1,6 @@
+
+//Potentially rename and clean up
+
 import React from "react";
 
 class Ingredients extends React.Component {
