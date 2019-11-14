@@ -46,7 +46,7 @@ class App extends React.Component {
           console.log(response);
           for (var i = 0; i < response.data.drinks.length; i++) {
             drinksTemp.push({
-              drinkName: response.data.drinks[i].strIngredient1,
+              drinkName: response.data.drinks[i].strIngredient1
             });
             resolve(this.setState({ drinks: drinksTemp, loading: false }));
           }
@@ -78,17 +78,25 @@ class App extends React.Component {
           />
         </div>
         <div className="list">
-            <table style={{borderSpacing: "30px"}}>
-            {this.state.drinks.map((drink, index) => {
-              return (
-                <React.Fragment>
-                {index % 4 === 0 ? 
-                <React.Fragment> <tr></tr> <td>{drink.drinkName}</td> </React.Fragment> : <td>{drink.drinkName}</td>}
-                </React.Fragment>
-              );
-              
+          <table style={{ borderSpacing: "30px" }}>
+            <thead></thead>
+            <tbody>
+              {this.state.drinks.map((drink, index) => {
+                return (
+                  <React.Fragment>
+                    {index % 4 === 0 ? (
+                      <React.Fragment>
+                        <tr></tr> <td key={index}>{drink.drinkName}</td>
+                      </React.Fragment>
+                    ) : (
+                      <td key={index}>{drink.drinkName}</td>
+                    )}
+                  </React.Fragment>
+                );
               })}
-         </table>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
         </div>
       </div>
     );
