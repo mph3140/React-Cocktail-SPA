@@ -78,16 +78,17 @@ class App extends React.Component {
           />
         </div>
         <div className="list">
-          
+            <table style={{borderSpacing: "30px"}}>
             {this.state.drinks.map((drink, index) => {
               return (
                 <React.Fragment>
-                {index % 4 === 0 ? <React.Fragment><tr></tr><td>{drink.drinkName}</td></React.Fragment> : <td>{drink.drinkName}</td>}
+                {index % 4 === 0 ? 
+                <React.Fragment> <tr></tr> <td>{drink.drinkName}</td> </React.Fragment> : <td>{drink.drinkName}</td>}
                 </React.Fragment>
               );
               
               })}
-         
+         </table>
         </div>
       </div>
     );
